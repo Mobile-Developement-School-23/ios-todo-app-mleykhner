@@ -18,6 +18,16 @@ struct TodoItem : Hashable, Equatable {
     let done: Bool
     let creationDate: Date
     let modificationDate: Date?
+    
+    init(id: String = UUID().uuidString, text: String, priority: Priority, deadline: Date?, done: Bool, creationDate: Date, modificationDate: Date?) {
+        self.id = id
+        self.text = text
+        self.priority = priority
+        self.deadline = deadline
+        self.done = done
+        self.creationDate = creationDate
+        self.modificationDate = modificationDate
+    }
 
     // Переопределение оператора сравнения для протокола Equatable
     static func == (lhs: Self, rhs: Self) -> Bool {
@@ -136,7 +146,8 @@ extension TodoItem {
             let deadlineString = deadline != nil ? deadline!.timeIntervalSince1970.description : "NULL"
             let creationDateString = creationDate.timeIntervalSince1970.description
             let modificationDateString = modificationDate != nil ? modificationDate!.timeIntervalSince1970.description : "NULL"
-            return "\(id);\(text);\(priority.rawValue);\(deadlineString);\(done.description.lowercased());\(creationDateString);\(modificationDateString)"
+            let priorityString = priority != .normal ? priority.rawValue : "NULL"
+            return "\(id);\(text);\(priorityString);\(deadlineString);\(done.description.lowercased());\(creationDateString);\(modificationDateString)"
         }
     }
 }
