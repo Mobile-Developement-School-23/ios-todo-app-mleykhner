@@ -95,8 +95,8 @@ extension TodoItem {
 
 // Разбор CSV
 extension TodoItem {
-    static func parse(CSVLine: String, separator: String = ";") -> TodoItem? {
-        let dataCells = CSVLine.split(separator: separator).map { element -> String? in
+    static func parse(csv line: String, separator: String = ";") -> TodoItem? {
+        let dataCells = line.split(separator: separator).map { element -> String? in
             if element == "NULL" { return nil }
             return String(element)
         }
@@ -129,12 +129,6 @@ extension TodoItem {
                         creationDate: creationDate,
                         modificationDate: modificationDate)
         
-    }
-    
-    static func parse(CSVMultiple: String, separator: String = ";") -> [TodoItem] {
-        return CSVMultiple.split(separator: "\n").compactMap { element in
-            return TodoItem.parse(CSVLine: String(element), separator: separator)
-        }
     }
     
     var csv: String {

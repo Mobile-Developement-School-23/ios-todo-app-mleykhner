@@ -93,7 +93,7 @@ class FileCache {
         let appDataFolder = rootUrl.appendingPathComponent("YaHomework")
         let fileUrl = appDataFolder.appendingPathComponent("TodoList.csv")
         let csvLines = try String(contentsOf: fileUrl)
-        todoList = Set(csvLines.split(separator: "\n").compactMap { TodoItem.parse(CSVLine: String($0)) })
+        todoList = Set(csvLines.split(separator: "\n").compactMap { TodoItem.parse(csv: String($0)) })
     }
 }
 
