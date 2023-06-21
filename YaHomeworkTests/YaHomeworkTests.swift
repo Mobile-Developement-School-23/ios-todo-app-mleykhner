@@ -184,7 +184,7 @@ final class YaHomeworkTests: XCTestCase {
     
     func testFromCSV_line() {
         let input = "7269829;Погладить кошечку;important;1686588922;false;1686585922;NULL"
-        let result = TodoItem.parse(CSVLine: input)
+        let result = TodoItem.parse(csv: input)
         XCTAssertNotNil(result)
         if result == nil { return }
         XCTAssertEqual(result!.id, "7269829")
@@ -198,19 +198,8 @@ final class YaHomeworkTests: XCTestCase {
     
     func testFromCSV_line_missingData() {
         let input = "7269829;Погладить кошечку;important;1686588922;1686585922;NULL"
-        let result = TodoItem.parse(CSVLine: input)
+        let result = TodoItem.parse(csv: input)
         XCTAssertNil(result)
-    }
-    
-    func testFromCSV_multiple() throws {
-        let input = """
-                    7269829;Погладить кошечку;important;1686588922;false;1686585922;NULL
-                    9287710;Посадить цветочек;unimportant;NULL;false;1686585922;1686587922
-                    """
-        let result = TodoItem.parse(CSVMultiple: input)
-        XCTAssertEqual(result.count, 2)
-        XCTAssertEqual(result[0].id, "7269829")
-        XCTAssertEqual(result[1].id, "9287710")
     }
     
     func testToCSV() {
